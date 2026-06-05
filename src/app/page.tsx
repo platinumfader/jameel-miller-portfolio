@@ -211,6 +211,7 @@ export default function Home() {
                           className="group rounded-2xl border border-white/10 bg-black/40 p-6 transition hover:-translate-y-1 hover:border-white/30"
                         >
                           <div className="flex flex-col gap-3">
+                            <div className="aspect-[16/10] w-full rounded-xl border border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-black/20 shadow-[0_0_30px_rgba(163,230,53,0.08)]" />
                             <div className="flex items-center justify-between">
                               <h4 className="text-lg font-semibold">
                                 {project.title}
