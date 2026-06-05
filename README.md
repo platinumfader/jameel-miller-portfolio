@@ -2,6 +2,21 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+### Supabase setup (contact form)
+Create a table named `contact_submissions` with the following columns:
+- `id` uuid (primary key, default: `gen_random_uuid()`)
+- `created_at` timestamptz (default: `now()`)
+- `name` text
+- `email` text
+- `message` text
+- `project_type` text
+
+Then add your Supabase env vars to `.env.local`:
+```
+NEXT_PUBLIC_SUPABASE_URL=...
+NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+```
+
 First, run the development server:
 
 ```bash
