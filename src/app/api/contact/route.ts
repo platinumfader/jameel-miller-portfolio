@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 
 const VALID_PROJECT_TYPES = new Set([
   "Product Design",
@@ -7,6 +7,13 @@ const VALID_PROJECT_TYPES = new Set([
   "Brand Systems",
   "Other",
 ]);
+
+type ContactSubmission = {
+  name: string;
+  email: string;
+  message: string;
+  project_type: string;
+};
 
 export async function POST(request: Request) {
   try {
@@ -27,12 +34,23 @@ export async function POST(request: Request) {
       );
     }
 
-    const { error } = await supabase.from("contact_submissions").insert({
-      name,
-      email,
-      message,
-      project_type: projectType,
-    });
+    const supabase = getSupabase();
+
+    if (!supabase) {
+      return Response.json(
+        { error: "Contact form is not configured yet." },
+        { status: 503 }
+      );
+    }
+
+    const { error } = await (supabase as any)
+      .from("contact_submissions")
+      .insert({
+        name,
+        email,
+        message,
+        project_type: projectType,
+      });
 
     if (error) {
       return Response.json(
